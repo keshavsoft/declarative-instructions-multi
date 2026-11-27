@@ -1,5 +1,6 @@
+// src/v4/instructions.json
 var e = {
-	"set-serial": [
+	"options-serial": [
 		{
 			narration: "Prepend the serial column width to the table colgroup.",
 			destinationPath: {
@@ -21,6 +22,16 @@ var e = {
 			func: null
 		},
 		{
+			narration: "Prepend the serial number cell into each table body row.",
+			destinationPath: {
+				action: "unshiftSerialToRows",
+				jsonPath: "$.base..*[?@.attributes['data-role'] == 'table-body'].children"
+			},
+			sourcePath: null,
+			templateKey: "buildBodyCell",
+			func: null
+		},
+		{
 			narration: "Prepend the serial footer cell to the table footer row.",
 			destinationPath: {
 				action: "unshift",
@@ -31,69 +42,7 @@ var e = {
 			func: null
 		}
 	],
-	serial: [
-		{
-			narration: "Prepend the serial column width to the table colgroup.",
-			destinationPath: {
-				fileName: "base",
-				filePath: ["children"],
-				action: "unshift",
-				jsonPath: "$..*[?@.attributes['data-role'] == 'table-colgroup']"
-			},
-			sourcePath: null,
-			templateKey: "colGroupForSerial",
-			func: null
-		},
-		{
-			narration: "Prepend the serial header cell to the table header row.",
-			destinationPath: {
-				fileName: "base",
-				filePath: ["children"],
-				action: "unshift",
-				jsonPath: "$..*[?@.attributes['data-role'] == 'table-header-row']"
-			},
-			sourcePath: null,
-			templateKey: "headerSerialCell",
-			func: null
-		},
-		{
-			narration: "Prepend the serial number cell into each table body row.",
-			destinationPath: {
-				fileName: "base",
-				filePath: ["children"],
-				action: "unshiftSerialToRows",
-				jsonPath: "$..*[?@.attributes['data-role'] == 'table-body']"
-			},
-			sourcePath: null,
-			templateKey: "buildBodyCell",
-			func: null
-		},
-		{
-			narration: "Prepend the serial footer cell to the table footer row.",
-			destinationPath: {
-				fileName: "base",
-				filePath: ["children"],
-				action: "unshift",
-				jsonPath: "$..*[?@.attributes['data-role'] == 'table-footer-row']"
-			},
-			sourcePath: null,
-			templateKey: "headerSerialCell",
-			func: null
-		}
-	],
-	search: [{
-		narration: "Prepend the search row to top of the table.",
-		destinationPath: {
-			fileName: "base",
-			filePath: ["children"],
-			action: "unshift",
-			jsonPath: "$..*[?@.attributes['data-role'] == 'table-parent']"
-		},
-		sourcePath: null,
-		templateKey: "tableSearch",
-		func: null
-	}],
-	"options-show-button": [
+	"options-options-showButton": [
 		{
 			narration: "Append the options column width to the table colgroup.",
 			destinationPath: {
@@ -135,7 +84,7 @@ var e = {
 			func: null
 		}
 	],
-	"options-show-edit-button": [
+	"options-options-showEditButton": [
 		{
 			narration: "Append edit column width.",
 			destinationPath: {
@@ -177,7 +126,7 @@ var e = {
 			func: null
 		}
 	],
-	"options-show-delete-button": [
+	"options-options-showDeleteButton": [
 		{
 			narration: "Append delete column width.",
 			destinationPath: {
