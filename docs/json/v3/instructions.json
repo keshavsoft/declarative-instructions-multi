@@ -230,5 +230,83 @@
       "templateKey": "emptyCell",
       "func": null
     }
+  ],
+  "card-with-footer": [
+    {
+      "narration": "Build card header content.",
+      "destinationPath": {
+        "action": "push",
+        "jsonPath": "$.base..*[?@.attributes['data-role'] == 'card-header'].children"
+      },
+      "sourcePath": "$.data",
+      "templateKey": "buildCardHeaderTemplate",
+      "func": "applyTemplate"
+    },
+    {
+      "narration": "Build card body content.",
+      "destinationPath": {
+        "action": "push",
+        "jsonPath": "$.base..*[?@.attributes['data-role'] == 'card-body'].children"
+      },
+      "sourcePath": "$.data",
+      "templateKey": "buildCardBodyTemplate",
+      "func": "applyTemplate"
+    },
+    {
+      "narration": "Build card footer content.",
+      "destinationPath": {
+        "action": "push",
+        "jsonPath": "$.base..*[?@.attributes['data-role'] == 'card-footer'].children"
+      },
+      "sourcePath": "$.data",
+      "templateKey": "buildCardFooterTemplate",
+      "func": "applyTemplate"
+    }
+  ],
+  "table-search-toolbar": [
+    {
+      "narration": "Insert the search toolbar frame before the table.",
+      "destinationPath": {
+        "action": "unshift",
+        "jsonPath": "$.base.children"
+      },
+      "sourcePath": null,
+      "templateKey": "searchToolbar",
+      "func": null,
+      "skipIf": "$..*[?@.attributes['data-role'] == 'search-toolbar']"
+    },
+    {
+      "narration": "Insert the search label into its configured slot.",
+      "destinationPath": {
+        "action": "push",
+        "jsonPath": "$.base..*[?@.attributes['data-role'] == 'search-label-slot'].children"
+      },
+      "sourcePath": null,
+      "templateKey": "searchLabel",
+      "func": null,
+      "skipIf": "$..*[?@.attributes.id == 'table-title']"
+    },
+    {
+      "narration": "Insert the search helper text into its configured slot.",
+      "destinationPath": {
+        "action": "push",
+        "jsonPath": "$.base..*[?@.attributes['data-role'] == 'search-helper-slot'].children"
+      },
+      "sourcePath": null,
+      "templateKey": "searchHelper",
+      "func": null,
+      "skipIf": "$..*[?@.attributes.id == 'search-feedback']"
+    },
+    {
+      "narration": "Insert the search input into its configured slot.",
+      "destinationPath": {
+        "action": "push",
+        "jsonPath": "$.base..*[?@.attributes['data-role'] == 'search-input-slot'].children"
+      },
+      "sourcePath": null,
+      "templateKey": "searchInput",
+      "func": null,
+      "skipIf": "$..*[?@.attributes.id == 'tableSearch']"
+    }
   ]
 }

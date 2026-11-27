@@ -1,6 +1,6 @@
 {
   "name": "declarative-instructions-multi",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Grouped, ordered declarative UI assembly steps for table report features.",
   "type": "module",
   "main": "./src/index.js",
