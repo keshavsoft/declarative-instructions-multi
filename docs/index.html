@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100b1b">
-  <meta name="description" content="How the multi instruction package adds serial and action columns to the tested V7 report table.">
-  <title>Adding table features — Multi instructions</title>
+  <meta name="description" content="How the V4 multi instruction catalog groups coordinated JSON tree updates for table, search, and card features.">
+  <title>Coordinated instruction groups — Multi instructions V4</title>
   <style>
     :root{color-scheme:dark;--bg:#100b1b;--panel:#191128;--line:#3a2a50;--text:#f4eefb;--muted:#b4a5c7;--violet:#c4a1ff;--pink:#ff9bc8;--amber:#f6d27a;--green:#87e3ba;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#402356 0,transparent 40%),var(--bg);color:var(--text);font:16px/1.6 var(--sans)}a{color:var(--violet);text-decoration:none}a:hover{text-decoration:underline}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.top{height:68px;border-bottom:1px solid #ffffff16;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:12px;align-items:center;color:var(--text);font-weight:750;letter-spacing:.01em}.mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(145deg,var(--pink),var(--violet));display:grid;place-items:center;color:#1a1023;font-size:14px;font-weight:900;box-shadow:0 8px 30px #c4a1ff38}.nav{display:flex;gap:22px;font-size:13px;color:var(--muted)}.hero{padding:88px 0 66px;max-width:850px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid #c4a1ff52;border-radius:999px;background:#c4a1ff10;color:#ddc5ff;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}.dot{width:7px;height:7px;background:var(--amber);border-radius:50%;box-shadow:0 0 14px var(--amber)}h1{font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-.055em;margin:24px 0 20px}.shine{background:linear-gradient(95deg,#fff 5%,#e3bdff 52%,#ffadd0);color:transparent;background-clip:text}.lead{max-width:700px;color:#cbbfda;font-size:19px;line-height:1.65}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;gap:9px;padding:11px 15px;border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:14px;font-weight:700;background:#ffffff08}.btn.primary{background:linear-gradient(110deg,#d399ff,#ff9bc8);color:#1d1026;border:0}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:48px}.metric{border:1px solid #ffffff18;background:#120d1eae;border-radius:14px;padding:15px 17px}.metric b{display:block;font-size:20px;color:#fff}.metric span{color:var(--muted);font-size:12px}.section{padding:32px 0 70px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}.kicker{font:700 11px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--pink)}h2{font-size:clamp(26px,4vw,38px);line-height:1.15;letter-spacing:-.035em;margin:7px 0 0}.sub{color:var(--muted);max-width:570px;margin:8px 0 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid var(--line);background:linear-gradient(150deg,#211631,#140e20);border-radius:16px;padding:21px}.card h3{margin:0 0 8px;font-size:17px}.card p{margin:0;color:var(--muted);font-size:14px}.num{font:700 12px var(--mono);color:var(--pink);margin-bottom:15px}.sequence{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}.sequence div{position:relative;border:1px solid var(--line);border-radius:12px;background:#160f23;padding:16px 14px}.sequence b{display:block;font:700 11px var(--mono);color:var(--violet);margin-bottom:7px}.sequence span{font-size:13px;color:#d0c4dd}.group{display:inline-block;margin:0 0 16px;padding:5px 9px;border:1px solid #c4a1ff40;border-radius:7px;background:#c4a1ff10;color:#e1cbff;font:12px var(--mono)}.codebox{border:1px solid #48335d;border-radius:15px;background:#0c0812;overflow:hidden}.code-top{display:flex;justify-content:space-between;align-items:center;padding:11px 15px;background:#ffffff08;border-bottom:1px solid #ffffff14;color:var(--muted);font:12px var(--mono)}pre{overflow:auto;margin:0;padding:20px;color:#e4d8f5;font:13px/1.65 var(--mono)}.cols{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.note{border-left:2px solid var(--pink);padding:2px 0 2px 16px;color:var(--muted);font-size:14px}.catalog{border:1px solid var(--line);border-radius:16px;background:#140e20;overflow:hidden}.catalog-bar{padding:15px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);flex-wrap:wrap}.catalog-bar input{flex:1;min-width:220px;background:#0d0915;border:1px solid #49365e;border-radius:9px;padding:11px 13px;color:var(--text);font:14px var(--sans);outline:none}.catalog-bar input:focus{border-color:var(--violet)}#count{font:12px var(--mono);color:var(--muted)}.items{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px}.item{border:1px solid #38284b;border-radius:11px;background:#1a1227;padding:12px}.item summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}.item summary::-webkit-details-marker{display:none}.key{font:700 13px var(--mono);color:#f0e7fb;overflow-wrap:anywhere}.badge{white-space:nowrap;color:#e3caff;font:10px var(--mono);border:1px solid #c4a1ff42;border-radius:999px;padding:3px 7px}.item p{margin:9px 0;color:var(--muted);font-size:13px}.item pre{padding:11px;border-radius:8px;background:#0d0915;font-size:11px}.empty{display:none;padding:24px;color:var(--muted);text-align:center}.footer{border-top:1px solid #ffffff18;padding:27px 0 40px;color:var(--muted);font-size:13px}.footrow{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
@@ -16,66 +16,53 @@
 <body>
   <header class="top wrap">
     <a class="brand" href="#top"><span class="mark">DI</span><span>declarative-instructions-multi</span></a>
-    <nav class="nav" aria-label="Page navigation"><a href="#story">Story</a><a href="#groups">Feature groups</a><a href="#sequence">V7 sequence</a><a href="https://github.com/keshavsoft/declarative-instructions-multi">GitHub ↗</a></nav>
+    <nav class="nav" aria-label="Page navigation"><a href="#story">Story</a><a href="#groups">Feature groups</a><a href="#sequence">Use a group</a><a href="https://github.com/keshavsoft/declarative-instructions-multi">GitHub ↗</a></nav>
   </header>
   <main id="top" class="wrap">
     <section class="hero">
-      <span class="eyebrow"><span class="dot"></span> Tested path · V7 table</span>
-      <h1>Some table features<br><span class="shine">change several places.</span></h1>
-      <p class="lead">The multi package groups the coordinated edits used to add serial, options, and edit columns to the V7 table. Each group runs as one named reference in the same ordered sequence as the single table-building steps.</p>
-      <div class="actions"><a class="btn primary" href="#groups">See the table feature groups <span>↓</span></a><a class="btn" href="https://www.npmjs.com/package/declarative-instructions-multi">View npm package ↗</a></div>
-      <div class="metrics"><div class="metric"><b>3</b><span>multi references in the sample</span></div><div class="metric"><b>11</b><span>ordered edits inside those groups</span></div><div class="metric"><b>12</b><span>single + multi references in all</span></div></div>
+      <span class="eyebrow"><span class="dot"></span> V4 instruction catalog</span>
+      <h1>One feature can touch<br><span class="shine">several places.</span></h1>
+      <p class="lead">This package keeps related writes together as named, ordered groups. A runner can add a complete table column, fill a search toolbar, or build card content by selecting one key.</p>
+      <div class="actions"><a class="btn primary" href="#groups">Explore the groups <span>↓</span></a><a class="btn" href="https://www.npmjs.com/package/declarative-instructions-multi">View npm package ↗</a></div>
+      <div class="metrics"><div class="metric"><b>6</b><span>named instruction groups</span></div><div class="metric"><b>23</b><span>ordered atomic steps</span></div><div class="metric"><b>3</b><span>feature areas covered</span></div></div>
     </section>
 
     <section id="story" class="section">
-      <div class="section-head"><div><div class="kicker">The table story</div><h2>Build the shell, then add features.</h2></div><p class="sub">The sample clones <code>spec.tableWithFooter</code>, fills its table sections and search toolbar with single steps, then calls multi groups for the serial and action columns.</p></div>
+      <div class="section-head"><div><div class="kicker">The group story</div><h2>Keep coordinated writes together.</h2></div><p class="sub">Each key maps to an ordered array. The runner applies its child steps to the current state before moving to the next instruction reference.</p></div>
       <div class="grid">
-        <article class="card"><div class="num">01 / SERIAL SETUP</div><h3>Coordinate the edges</h3><p><code>set-serial</code> prepends a width, header cell, and footer cell. The sample follows with a single step that fills each body row.</p></article>
-        <article class="card"><div class="num">02 / OPTIONS COLUMN</div><h3>Add the row button</h3><p>The options group adds a width and header, pushes a button into each body row, and adds its footer cell.</p></article>
-        <article class="card"><div class="num">03 / EDIT COLUMN</div><h3>Repeat the coordinated pattern</h3><p>The edit group applies the same four-part table change using the edit-specific templates.</p></article>
+        <article class="card"><div class="num">01 / TABLE COLUMNS</div><h3>Build every row of the feature</h3><p><code>options-serial</code> adds the width, header, numbered body cells, and footer cell as one sequence.</p></article>
+        <article class="card"><div class="num">02 / ACTION COLUMNS</div><h3>Keep the table aligned</h3><p>Show, edit, and delete groups update the colgroup, header, every body row, and footer in the same order.</p></article>
+        <article class="card"><div class="num">03 / OTHER COMPOSITIONS</div><h3>Reuse the same group shape</h3><p><code>table-search-toolbar</code> fills the toolbar slots; <code>card-with-footer</code> applies data to three card regions.</p></article>
       </div>
-      <div class="sequence" aria-label="Multi table feature sequence"><div><b>SET-SERIAL</b><span>width · header · footer</span></div><div><b>SINGLE STEP</b><span>serial cell per row</span></div><div><b>OPTIONS</b><span>width · header · rows · footer</span></div><div><b>EDIT</b><span>width · header · rows · footer</span></div></div>
+      <div class="sequence" aria-label="Multi feature group sequence"><div><b>SELECT KEY</b><span>named feature group</span></div><div><b>READ ARRAY</b><span>ordered child steps</span></div><div><b>APPLY STEPS</b><span>shared current state</span></div><div><b>CONTINUE</b><span>next descriptor</span></div></div>
     </section>
 
     <section id="groups" class="section">
-      <div class="section-head"><div><div class="kicker">Three groups used</div><h2>Each key describes a table feature.</h2></div><p class="sub">A multi descriptor expands to its ordered array of template insertions against the current base table.</p></div>
+      <div class="section-head"><div><div class="kicker">V4 catalog</div><h2>Each key names one coordinated job.</h2></div><p class="sub">Some groups use static template actions; card groups use a transformation function and data source. The package defines these steps but does not execute them.</p></div>
       <div class="cols">
-        <div class="codebox"><div class="code-top"><span>V7 sample references</span><span>type: multi</span></div><pre><code>{ type: "multi", key: "set-serial" },
-{ type: "multi", key: "options-show-button" },
-{ type: "multi", key: "options-show-edit-button" }</code></pre></div>
-        <div class="note"><strong style="color:var(--text)">Serial is completed across both reports</strong><br><br>The multi group adds serial width, header, and footer. The sample’s next reference, <code>{ type: "single", key: "serial-show-serial" }</code>, inserts the numbered cells into the existing body rows. Together, those references make the serial column complete.</div>
+        <div class="codebox"><div class="code-top"><span>Example descriptor</span><span>type: multi</span></div><pre><code>{ type: "multi", key: "options-serial" }</code></pre></div>
+        <div class="note"><strong style="color:var(--text)">The serial group is complete</strong><br><br>In V4, <code>options-serial</code> includes the body-row numbering as well as its width, header, and footer. The runner applies all four child steps in their declared order.</div>
       </div>
     </section>
 
     <section id="sequence" class="section">
-      <div class="section-head"><div><div class="kicker">Exact sample order</div><h2>The runner composes both packages.</h2></div><p class="sub">Table construction and feature insertion happen in one ordered call over one cloned AST.</p></div>
-      <div class="codebox"><div class="code-top"><span>samples/v7/table/index.js</span><span>12 references · ordered</span></div><pre><code>instructions: [
-  { type: "single", key: "buildColgroup" },
-  { type: "single", key: "buildHeader" },
-  { type: "single", key: "buildBody" },
-  { type: "single", key: "buildFooter" },
-  { type: "single", key: "set-search" },
-  { type: "single", key: "search-show-label" },
-  { type: "single", key: "search-show-helper" },
-  { type: "single", key: "search-show-input" },
-  { type: "multi", key: "set-serial" },
-  { type: "single", key: "serial-show-serial" },
-  { type: "multi", key: "options-show-button" },
-  { type: "multi", key: "options-show-edit-button" }
-],
-base: structuredClone(spec.tableWithFooter),
-data: { columns, data }</code></pre></div>
-      <p class="sub" style="margin-top:16px">The step runner resolves every <code>{ type, key }</code> reference and returns the mutated base. The sample hands that completed AST to <code>json-to-dom</code>. See the <a href="https://github.com/keshavsoft/declarative-instructions-single">single package story</a> for the table sections and search steps.</p>
+      <div class="section-head"><div><div class="kicker">Use a group</div><h2>Reference the key; let the runner execute its steps.</h2></div><p class="sub">A multi descriptor selects this package’s array. The consuming runner shares its current state with every atomic step in the group.</p></div>
+      <div class="codebox"><div class="code-top"><span>Instruction data</span><span>V4 group shape</span></div><pre><code>import multiInstructions from "declarative-instructions-multi";
+
+const serialSteps = multiInstructions["options-serial"];
+// serialSteps contains four ordered writes
+
+const descriptor = { type: "multi", key: "options-serial" };</code></pre></div>
+      <p class="sub" style="margin-top:16px">The catalog describes the feature. A step runner supplies the state, applies each child instruction, and continues with the next descriptor.</p>
     </section>
 
     <section id="catalog" class="section">
-      <div class="section-head"><div><div class="kicker">Multi keys in this sample</div><h2>Inspect the feature bundles.</h2></div><p class="sub">Search the three multi groups used by the V7 table sample. Expand a group to inspect its ordered JSON steps.</p></div>
-      <div class="catalog"><div class="catalog-bar"><input id="search" type="search" placeholder="Search serial, options, edit…" aria-label="Search V7 multi table groups"><span id="count" aria-live="polite">Loading table groups…</span></div><div class="items" id="items"></div><div class="empty" id="empty">No table groups match that search.</div></div>
+      <div class="section-head"><div><div class="kicker">Complete V4 catalog</div><h2>Inspect all six groups.</h2></div><p class="sub">Search the current V4 keys and expand a group to read its ordered JSON steps.</p></div>
+      <div class="catalog"><div class="catalog-bar"><input id="search" type="search" placeholder="Search serial, card, toolbar…" aria-label="Search V4 multi instruction groups"><span id="count" aria-live="polite">Loading V4 groups…</span></div><div class="items" id="items"></div><div class="empty" id="empty">No groups match that search.</div></div>
     </section>
   </main>
-  <footer class="footer"><div class="wrap footrow"><span>MIT © KeshavSoft · V7 table feature story</span><span><a href="https://github.com/keshavsoft/declarative-instructions-multi">Source</a> · <a href="https://www.npmjs.com/package/declarative-instructions-multi">npm</a></span></div></footer>
+  <footer class="footer"><div class="wrap footrow"><span>MIT © KeshavSoft · V4 multi instruction catalog</span><span><a href="https://github.com/keshavsoft/declarative-instructions-multi">Source</a> · <a href="https://www.npmjs.com/package/declarative-instructions-multi">npm</a></span></div></footer>
   <script type="module">
-    const sampleKeys = ["set-serial", "options-show-button", "options-show-edit-button"];
     const list = document.querySelector("#items");
     const search = document.querySelector("#search");
     const count = document.querySelector("#count");
@@ -93,15 +80,15 @@ data: { columns, data }</code></pre></div>
         details.append(summary, append("p", "", narrations || "Table feature group"), append("pre", "", JSON.stringify(value, null, 2)));
         list.append(details);
       }
-      count.textContent = `${visible.length} of ${entries.length} sample groups`;
+      count.textContent = `${visible.length} of ${entries.length} catalog groups`;
       empty.style.display = visible.length ? "none" : "block";
     }
     search.addEventListener("input", render);
     try {
-      const response = await fetch("./json/v3/instructions.json");
+      const response = await fetch("./json/v4/instructions.json");
       if (!response.ok) throw new Error(`Instruction request failed (${response.status})`);
       const instructions = await response.json();
-      entries = sampleKeys.filter(key => Array.isArray(instructions[key])).map(key => [key, instructions[key]]);
+      entries = Object.entries(instructions).filter(([, value]) => Array.isArray(value));
       render();
     } catch (error) { count.textContent = "Table groups unavailable"; empty.style.display = "block"; empty.textContent = "Open this page through the documentation site to load the versioned JSON."; }
   </script>
