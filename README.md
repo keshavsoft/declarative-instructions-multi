@@ -1,114 +1,92 @@
 # declarative-instructions-multi
 
-> **One feature, several ordered changes.** Declarative instruction bundles for assembling report features across a shared UI tree.
+> Coordinated table features, applied as ordered instruction groups.
 
 [![npm](https://img.shields.io/npm/v/declarative-instructions-multi?color=cb3837&label=npm)](https://www.npmjs.com/package/declarative-instructions-multi)
-[![Documentation](https://img.shields.io/badge/docs-read%20the%20story-a78bfa)](https://keshavsoft.github.io/declarative-instructions-multi/)
+[![Documentation](https://img.shields.io/badge/docs-follow%20the%20table-a78bfa)](https://keshavsoft.github.io/declarative-instructions-multi/)
 ![License: MIT](https://img.shields.io/badge/license-MIT-34d399.svg)
 
-## The story
+## The table story
 
-The original `declarative-instructions` report was split into two complementary reports. This package tells the **multi-step story**: a report feature often touches several places in the same tree. Adding a serial column, for example, can require a width, a header cell, body cells, and a footer cell.
+The tested V7 table sample in [`json-renderers-run-instructions-steps`](https://github.com/keshavsoft/json-renderers-run-instructions-steps/tree/main/samples/v7/table) combines this package with `declarative-instructions-single`. Single references build the table sections and toolbar. Multi references add features that touch several table sections together.
 
-Instead of scattering those changes across unrelated keys, each feature is a named array of steps. The renderer can apply the steps in order, while the feature key keeps the whole change easy to discover and enable as a unit.
+It begins with a cloned `spec.tableWithFooter` shell and three column definitions plus three sample records. The table structure is in place before the multi groups add the serial and action columns.
 
-## A feature bundle
+Each `{ type: "multi", key }` selects an ordered array from this package. The step runner applies every item in that array to the same cloned `tableWithFooter` tree before continuing to the next reference.
 
-The complete `serial` feature coordinates four destinations:
+## The three groups used by the sample
 
-```json
-{
-  "serial": [
-    {
-      "narration": "Prepend the serial column width to the table colgroup.",
-      "destinationPath": {
-        "fileName": "base",
-        "filePath": ["children"],
-        "action": "unshift",
-        "jsonPath": "$..*[?@.attributes['data-role'] == 'table-colgroup']"
-      },
-      "sourcePath": null,
-      "templateKey": "colGroupForSerial",
-      "func": null
-    },
-    {
-      "narration": "Prepend the serial header cell to the table header row.",
-      "destinationPath": {
-        "fileName": "base",
-        "filePath": ["children"],
-        "action": "unshift",
-        "jsonPath": "$..*[?@.attributes['data-role'] == 'table-header-row']"
-      },
-      "sourcePath": null,
-      "templateKey": "headerSerialCell",
-      "func": null
-    },
-    {
-      "narration": "Prepend the serial number cell into each table body row.",
-      "destinationPath": {
-        "fileName": "base",
-        "filePath": ["children"],
-        "action": "unshiftSerialToRows",
-        "jsonPath": "$..*[?@.attributes['data-role'] == 'table-body']"
-      },
-      "sourcePath": null,
-      "templateKey": "buildBodyCell",
-      "func": null
-    },
-    {
-      "narration": "Prepend the serial footer cell to the table footer row.",
-      "destinationPath": {
-        "fileName": "base",
-        "filePath": ["children"],
-        "action": "unshift",
-        "jsonPath": "$..*[?@.attributes['data-role'] == 'table-footer-row']"
-      },
-      "sourcePath": null,
-      "templateKey": "headerSerialCell",
-      "func": null
-    }
-  ]
-}
-```
-
-Each step uses the same four-part instruction vocabulary as the single report, with an `action` describing how the targeted children are changed.
-
-## Included feature groups
-
-| Feature key | Ordered work |
+| Multi key | Coordinated table changes |
 | --- | --- |
-| `set-serial` | Add serial width, header, and footer cells. |
-| `serial` | Add serial width, header, body, and footer cells. |
-| `search` | Insert the search row before the table. |
-| `options-show-button` | Add an options width, header, row buttons, and footer cell. |
-| `options-show-edit-button` | Add an edit width, header, row buttons, and footer cell. |
-| `options-show-delete-button` | Add a delete width, header, row buttons, and footer cell. |
+| `set-serial` | Prepends the serial width, header cell, and footer cell. The sample follows it with the single `serial-show-serial` step to add serial cells to the body rows. |
+| `options-show-button` | Adds the options width, header, one button cell per body row, and footer cell. |
+| `options-show-edit-button` | Adds the edit width, header, one edit cell per body row, and footer cell. |
 
-The v3 report contains six feature groups and twenty transformation steps. `set-serial` is the shorter serial variant; `serial` includes the body-row insertion as well.
+The sample has twelve references in total: nine single steps and these three multi groups. The groups expand into eleven coordinated insertions; together with the single steps, they assemble the complete table report.
 
-## Install and use
+## A group in context
 
-```bash
-npm install declarative-instructions-multi
-```
+The `set-serial` group handles the parts that share the same feature and destination order:
 
 ```js
-import instructions from "declarative-instructions-multi";
-
-const serialSteps = instructions.serial;
-for (const step of serialSteps) {
-  console.log(step.destinationPath.jsonPath, step.templateKey);
-}
+const tableSteps = [
+  { type: "multi", key: "set-serial" },
+  { type: "single", key: "serial-show-serial" },
+  { type: "multi", key: "options-show-button" },
+  { type: "multi", key: "options-show-edit-button" }
+];
 ```
 
-This package supplies declarative contracts, not the DOM renderer. Apply the groups with a compatible instruction runner and templates from `declarative-spec`. When composing a report, apply a feature group once; its steps insert the requested pieces into their target locations.
+`set-serial` adds the column width and the header and footer cells. The adjacent single step adds the serial value to each existing body row. Each options group then adds a full action column across the table.
 
-## Versions and source
+## The full tested sequence
 
-- Current instructions: [`src/v3/instructions.json`](src/v3/instructions.json)
-- Versioned JSON reference: [`docs/json/v3/instructions.json`](docs/json/v3/instructions.json)
-- Documentation story and searchable catalog: [`docs/index.html`](docs/index.html)
-- Related single-operation report: [declarative-instructions-single](https://github.com/keshavsoft/declarative-instructions-single)
+The sample first builds the table’s column group, header, body, and footer from `columns` and `data`. It then adds the search toolbar, serial feature, and action columns:
+
+```js
+import runInstructions from "json-renderers-run-instructions-steps";
+import spec from "declarative-spec";
+
+const base = structuredClone(spec.tableWithFooter);
+
+const result = runInstructions({
+  instructions: [
+    { type: "single", key: "buildColgroup" },
+    { type: "single", key: "buildHeader" },
+    { type: "single", key: "buildBody" },
+    { type: "single", key: "buildFooter" },
+    { type: "single", key: "set-search" },
+    { type: "single", key: "search-show-label" },
+    { type: "single", key: "search-show-helper" },
+    { type: "single", key: "search-show-input" },
+    { type: "multi", key: "set-serial" },
+    { type: "single", key: "serial-show-serial" },
+    { type: "multi", key: "options-show-button" },
+    { type: "multi", key: "options-show-edit-button" }
+  ],
+  base,
+  data: { columns, data }
+});
+```
+
+The runner applies each reference in sequence to the caller-provided canvas and returns the completed table AST. The sample’s final step hands that AST to `json-to-dom` for browser rendering.
+
+## Package roles
+
+- **`declarative-instructions-single`** defines one operation per key: build a table section, fill a search slot, or add serial values to body rows.
+- **`declarative-instructions-multi`** groups the related changes that make a serial or action column complete.
+- **`json-renderers-run-instructions-steps`** resolves `{ type, key }`, executes the selected operations, and mutates the cloned table tree.
+- **`declarative-spec`** supplies the empty table shell and the templates referenced by the instructions.
+
+## Install
+
+For the integrated table flow, install the runner and spec package; the runner depends on both instruction packages:
+
+```bash
+npm install json-renderers-run-instructions-steps declarative-spec
+```
+
+Current multi-step table instructions: [`src/v3/instructions.json`](src/v3/instructions.json) · [Searchable table story](docs/index.html)
 
 ## License
 
